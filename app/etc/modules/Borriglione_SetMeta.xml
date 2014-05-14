@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @category Borriglione
+* @package Borriglione_SetMeta
+* @author André Herrn <info@andre-herrn.de>
+* @copyright 2014 André Herrn (http://www.andre-herrn.de)
+* @license http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
+*/
+-->
+<config>
+    <modules>
+        <Borriglione_SetMeta>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Borriglione_SetMeta>
+    </modules>
+</config>

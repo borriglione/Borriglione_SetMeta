@@ -1,0 +1,14 @@
+{
+  "name": "borriglione/setmeta",
+  "license": ["OSL-3.0"],
+  "type": "magento-module",
+  "description": "Moved set Meta of Firegento_MageSetup functionality into a separate module",
+  "homepage": "https://github.com/borriglione/Borriglione_SetMeta",
+  "authors":[{
+    "name": "André Herrn",
+    "email": "info@andre-herrn.de"
+  }],
+  "require": {
+    "magento-hackathon/magento-composer-installer": "*"
+  }
+}

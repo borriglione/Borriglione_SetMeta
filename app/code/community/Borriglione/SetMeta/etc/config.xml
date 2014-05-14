@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<!--
+/**
+* @category Borriglione
+* @package Borriglione_SetMeta
+* @author André Herrn <info@andre-herrn.de>
+* @copyright 2014 André Herrn (http://www.andre-herrn.de)
+* @license http://opensource.org/licenses/gpl-3.0 GNU General Public License, version 3 (GPLv3)
+*/
+ -->
+<config>
+    <modules>
+        <Borriglione_SetMeta>
+            <version>0.1.0</version>
+        </Borriglione_SetMeta>
+    </modules>
+    <global>
+        <models>
+            <borriglione_setmeta>
+                <class>Borriglione_SetMeta_Model</class>
+            </borriglione_setmeta>
+        </models>
+        <resources>
+            <borriglione_setmeta_setup>
+                <setup>
+                    <module>Borriglione_SetMeta</module>
+                    <class>Mage_Catalog_Model_Resource_Eav_Mysql4_Setup</class>
+                </setup>
+            </borriglione_setmeta_setup>
+        </resources>
+        <events>
+            <catalog_product_save_before>
+                <observers>
+                    <borriglione_setmeta_observer>
+                        <class>borriglione_setmeta/observer</class>
+                        <type>model</type>
+                        <method>autogenerateMetaInformation</method>
+                    </borriglione_setmeta_observer>
+                </observers>
+            </catalog_product_save_before>
+        </events>
+    </global>
+</config>
