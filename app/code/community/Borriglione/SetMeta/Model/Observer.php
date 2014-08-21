@@ -24,7 +24,8 @@ class Borriglione_SetMeta_Model_Observer
         /* @var $product Mage_Catalog_Model_Product */
         $product = $observer->getEvent()->getProduct();
 
-        if ($product->getData('meta_autogenerate') == 1) {
+        if ($product->getData('meta_autogenerate') == 1
+            || Mage::getStoreConfig('catalog/frontend/ignore_meta_autogenerate_option') == 1) {
             // Set Meta Title
             $product->setMetaTitle($product->getName());
 
@@ -42,9 +43,6 @@ class Borriglione_SetMeta_Model_Observer
             $description = $product->getShortDescription();
             if (empty($description)) {
                 $description = $product->getDescription();
-            }
-            if (empty($description)) {
-                $description = $keywords;
             }
             if (mb_strlen($description) > 255) {
                 $remainder = '';
@@ -64,10 +62,10 @@ class Borriglione_SetMeta_Model_Observer
      */
     protected function _getCategoryKeywords($product)
     {
-        $categories = $product->getCategoryIds();
-        $categoryArr = $this->_fetchCategoryNames($categories);
-        $keywords = $this->_buildKeywords($categoryArr);
-
+        $categoryNames = $this->_fetchCategoryNames(
+            $product->getCategoryIds()
+        );
+        $keywords = $this->_buildKeywords($categoryNames);
         return $keywords;
     }
 
@@ -90,11 +88,18 @@ class Borriglione_SetMeta_Model_Observer
             if (array_key_exists($categoryId, $return['assigned'])
                 || array_key_exists($categoryId, $return['path'])
             ) {
-                return;
+                continue;
             }
 
             /* @var $category Mage_Catalog_Model_Category */
             $category = Mage::getModel('catalog/category')->load($categoryId);
+
+            //Check if category name is not empty
+            if (true == is_null($category->getName())) {
+                continue;
+            }
+
+            //Set category name
             $return['assigned'][$categoryId] = $category->getName();
 
             // Fetch path ids and remove the first two (base and root category)

@@ -28,8 +28,10 @@
                 </setup>
             </borriglione_setmeta_setup>
         </resources>
+    </global>
+    <frontend>
         <events>
-            <catalog_product_save_before>
+            <catalog_product_load_after>
                 <observers>
                     <borriglione_setmeta_observer>
                         <class>borriglione_setmeta/observer</class>
@@ -37,7 +39,14 @@
                         <method>autogenerateMetaInformation</method>
                     </borriglione_setmeta_observer>
                 </observers>
-            </catalog_product_save_before>
+            </catalog_product_load_after>
         </events>
-    </global>
+    </frontend>
+    <default>
+        <catalog>
+            <frontend>
+                <ignore_meta_autogenerate_option>1</ignore_meta_autogenerate_option>
+            </frontend>
+        </catalog>
+    </default>
 </config>
